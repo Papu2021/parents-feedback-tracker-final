@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Language, Question } from '../types';
 import FeedbackForm from './FeedbackForm';
 import ServicesGrid from './ServicesGrid';
+import ServiceCarousel from './ServiceCarousel';
 import Icon from './Icon';
 import { Star } from 'lucide-react';
 import { SERVICES_DATA } from '../constants';
@@ -54,29 +55,25 @@ const ParentDashboard: React.FC<ParentDashboardProps> = ({ lang, questions, onSu
     }
 
     return (
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-12 sm:space-y-16">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8 sm:space-y-12">
+            
+            {/* New Service Hero Carousel */}
+            <ServiceCarousel lang={lang} />
+
             {/* Welcome Banner */}
-            <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 rounded-[32px] p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden border border-gray-800 group">
+            <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 rounded-[24px] p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden border border-gray-800 group">
                 {/* Abstract Glows */}
                 <div className="absolute top-[-50%] right-[-10%] w-96 h-96 bg-amber-500/20 rounded-full blur-3xl group-hover:bg-amber-500/30 transition-colors duration-700"></div>
                 <div className="absolute bottom-[-50%] left-[-10%] w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
 
                 <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
                     <div>
-                        <div className="inline-block bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-xs font-bold text-amber-400 mb-4 tracking-widest uppercase">
-                            Dream Stars VIP
-                        </div>
-                        <h2 className="text-3xl sm:text-5xl font-extrabold mb-4 text-white leading-tight">
+                        <h2 className="text-2xl sm:text-4xl font-extrabold mb-3 text-white leading-tight">
                             {lang === 'am' ? 'እንኳን ደህና መጡ!' : 'Welcome back!'}
                         </h2>
-                        <p className="opacity-80 max-w-xl text-gray-300 text-base sm:text-lg leading-relaxed font-light">
+                        <p className="opacity-80 max-w-xl text-gray-300 text-sm sm:text-base leading-relaxed font-light">
                             {lang === 'am' ? 'የልጅዎን የእለት እንቅስቃሴ እዚህ ይከታተሉ፣ አገልግሎታችንን ከታች ይመልከቱ።' : 'Track your child\'s daily progress here and explore our premium services below.'}
                         </p>
-                    </div>
-                    
-                    {/* Decorative Icon */}
-                    <div className="hidden sm:block opacity-20 transform group-hover:scale-110 transition-transform duration-700">
-                         <Icon name="Baby" size={140} className="text-amber-500" />
                     </div>
                 </div>
             </div>

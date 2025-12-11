@@ -49,60 +49,74 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ questions, lang, onSubmit }
       <form onSubmit={handleSubmit} className="space-y-10 sm:space-y-14">
         {questions.map((q) => (
           <div key={q.id} className="border-b border-gray-100 pb-10 last:border-0 last:pb-0">
-            <div className="text-center mb-6 sm:mb-8 max-w-2xl mx-auto">
-              <p className="font-extrabold text-xl sm:text-2xl text-gray-900 font-amharic mb-3 leading-tight">
+            <div className="text-center mb-6 max-w-2xl mx-auto">
+              <p className="font-extrabold text-xl sm:text-2xl text-gray-900 font-amharic mb-2 leading-tight">
                 {q.textAm}
               </p>
-              <p className="text-sm sm:text-base text-gray-500 font-medium">
+              <p className="text-sm text-gray-500 font-medium">
                 {q.textEn}
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center max-w-xl mx-auto">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+              {/* Not Done Button */}
               <button
                 type="button"
                 onClick={() => handleSelect(q.id, 'not_done')}
-                className={`group flex-1 flex flex-col items-center justify-center gap-3 px-6 py-5 rounded-2xl border-2 transition-all duration-300 ${
+                className={`group flex-1 flex flex-row items-center justify-between px-5 py-3 rounded-xl border-2 transition-all duration-200 shadow-sm ${
                   answers[q.id] === 'not_done'
-                    ? 'bg-gray-900 border-gray-900 text-white shadow-xl scale-[1.03]'
-                    : 'bg-white border-gray-200 text-gray-400 hover:border-gray-900 hover:text-gray-900'
+                    ? 'bg-gray-900 border-gray-900 text-white shadow-xl'
+                    : 'bg-white border-gray-200 text-gray-500 hover:border-gray-400 hover:bg-gray-50'
                 }`}
               >
-                <div className={`p-2 rounded-full transition-colors ${answers[q.id] === 'not_done' ? 'bg-white/10' : 'bg-gray-100 group-hover:bg-gray-200'}`}>
-                    <XCircle size={32} strokeWidth={2.5} className={answers[q.id] === 'not_done' ? 'text-white' : 'text-gray-400 group-hover:text-gray-900'} />
+                <div className="flex items-center gap-3">
+                     <div className={`p-1.5 rounded-full ${answers[q.id] === 'not_done' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-400'}`}>
+                        <XCircle size={18} />
+                     </div>
+                    <span className="font-amharic font-bold text-sm uppercase tracking-wider">
+                    {lang === 'am' ? 'አልተሰራም' : 'Not Done'}
+                    </span>
                 </div>
-                <span className="font-amharic font-bold text-sm uppercase tracking-wider">
-                  {lang === 'am' ? 'አልተሰራም' : 'Not Done'}
-                </span>
+                {/* Radio Indicator */}
+                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${answers[q.id] === 'not_done' ? 'border-white' : 'border-gray-300'}`}>
+                    {answers[q.id] === 'not_done' && <div className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />}
+                </div>
               </button>
 
+              {/* Well Done Button */}
               <button
                 type="button"
                 onClick={() => handleSelect(q.id, 'well_done')}
-                className={`group flex-1 flex flex-col items-center justify-center gap-3 px-6 py-5 rounded-2xl border-2 transition-all duration-300 ${
+                className={`group flex-1 flex flex-row items-center justify-between px-5 py-3 rounded-xl border-2 transition-all duration-200 shadow-sm ${
                   answers[q.id] === 'well_done'
-                    ? 'bg-amber-500 border-amber-500 text-black shadow-xl shadow-amber-500/30 scale-[1.03]'
-                    : 'bg-white border-gray-200 text-gray-400 hover:border-amber-500 hover:text-amber-600'
+                    ? 'bg-amber-500 border-amber-500 text-black shadow-xl'
+                    : 'bg-white border-gray-200 text-gray-500 hover:border-amber-400 hover:text-amber-600 hover:bg-amber-50'
                 }`}
               >
-                <div className={`p-2 rounded-full transition-colors ${answers[q.id] === 'well_done' ? 'bg-black/10' : 'bg-amber-50 group-hover:bg-amber-100'}`}>
-                    <CheckCircle size={32} strokeWidth={2.5} className={answers[q.id] === 'well_done' ? 'text-black' : 'text-amber-300 group-hover:text-amber-600'} />
+                <div className="flex items-center gap-3">
+                     <div className={`p-1.5 rounded-full ${answers[q.id] === 'well_done' ? 'bg-black/10 text-black' : 'bg-amber-50 text-amber-500 group-hover:bg-amber-100'}`}>
+                        <CheckCircle size={18} />
+                     </div>
+                    <span className="font-amharic font-bold text-sm uppercase tracking-wider">
+                    {lang === 'am' ? 'በደንብ ተከናውኗል' : 'Well Done'}
+                    </span>
                 </div>
-                <span className="font-amharic font-bold text-sm uppercase tracking-wider">
-                  {lang === 'am' ? 'በደንብ ተከናውኗል' : 'Well Done'}
-                </span>
+                {/* Radio Indicator */}
+                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${answers[q.id] === 'well_done' ? 'border-black' : 'border-gray-300'}`}>
+                    {answers[q.id] === 'well_done' && <div className="w-2.5 h-2.5 rounded-full bg-black animate-pulse" />}
+                </div>
               </button>
             </div>
           </div>
         ))}
 
-        <div className="pt-6 sm:pt-8 flex justify-center">
+        <div className="pt-4 flex justify-center">
             <button
                 type="submit"
-                className="w-full sm:max-w-md bg-black hover:bg-gray-900 text-white font-bold py-2.5 rounded-xl shadow-xl hover:shadow-2xl hover:shadow-black/20 transform active:scale-[0.98] transition-all flex items-center justify-center gap-3 border border-gray-800"
+                className="w-full sm:max-w-xs bg-black hover:bg-gray-900 text-white font-bold py-2.5 rounded-xl shadow-xl hover:shadow-2xl hover:shadow-black/20 transform active:scale-[0.98] transition-all flex items-center justify-center gap-3 border border-gray-800 text-base"
             >
-                <span className="bg-amber-500 p-1 rounded-full text-black"><Send size={16}/></span>
-                <span className="text-base">{lang === 'am' ? 'ላክ' : 'Submit Feedback'}</span>
+                <span className="bg-amber-500 p-1 rounded-full text-black"><Send size={14}/></span>
+                <span>{lang === 'am' ? 'ላክ' : 'Submit Feedback'}</span>
             </button>
         </div>
       </form>
